@@ -27,16 +27,7 @@ const sch = {
 };
 
 const monmodel = mongoose.model("Employee", sch);
-// app.get("/", (req, res) => {
-//   StaffController.getAllStaff(req, (data) => {
-//     console.log(data);
-//   });
-// });
-// app.get("/staffs", (req, res) => {
-//   StaffController.getAllStaff(req, (data) => {
-//     res.send(data);
-//   });
-// });
+
 // app.get("/staff/id", (req, res) => {
 //   res.send("Staff by ids");
 // });
@@ -52,13 +43,45 @@ app.post("/staff", async (req, res) => {
   const val = await data.save();
   res.json(val);
 });
-// app.put("/", (req, res) => {
-//   res.send("put");
-// });
+app.put("/update/:id", async (req, res) => {
+  let upid = req.params.id;
+  let upname = req.body.name;
+  let updes = req.body.designation;
+  let upsal = req.body.salary;
+  let upjd = req.body.joined_date;
+  monmodel.findOneAndUpdate(
+    { id: upid },
+    {
+      $set: {
+        name: upname,
+        designation: updes,
+        salary: upsal,
+        joined_date: upjd,
+      },
+    },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.send("ERROR");
+      } else {
+        if (data == null) {
+          res.send("Not found id");
+        } else {
+          res.send(data);
+        }
+      }
+    },
+  );
+});
 // app.delete("/delete", (req, res) => {
 //   res.send("delete staff by id");
 // });
-
+app.get("/staff/:id", function (req, res) {
+  fetchid = req.params.id;
+  monmodel.find({ id: fetchid }, function (err, val) {
+    res.send(val);
+  });
+});
 port = "80";
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
