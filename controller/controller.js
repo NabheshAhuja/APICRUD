@@ -1,3 +1,4 @@
+const monmodel = require("../app");
 const getAllStaff = (req, callback) => {
   const data = [
     { id: "1", name: "shailesh", age: 33 },
