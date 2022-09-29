@@ -31,18 +31,7 @@ const monmodel = mongoose.model("Employee", sch);
 // app.get("/staff/id", (req, res) => {
 //   res.send("Staff by ids");
 // });
-app.post("/staff", async (req, res) => {
-  console.log("insidepostfunction");
-  const data = new monmodel({
-    id: req.body.id,
-    name: req.body.name,
-    designation: req.body.designation,
-    salary: req.body.salary,
-    joined_date: req.body.joined_date,
-  });
-  const val = await data.save();
-  res.json(val);
-});
+app.post("/staff", StaffController.injson);
 app.put("/update/:id", async (req, res) => {
   let upid = req.params.id;
   let upname = req.body.name;
@@ -97,3 +86,4 @@ port = "80";
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+module.exports = { monmodel };
