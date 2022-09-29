@@ -82,6 +82,17 @@ app.get("/staff/:id", function (req, res) {
     res.send(val);
   });
 });
+
+app.delete("/delete/:id", function (req, res) {
+  let delid = req.params.id;
+  monmodel.findOneAndDelete({ id: delid }, function (err, val) {
+    if (val == null) {
+      res.send("Not found");
+    } else {
+      res.send(val);
+    }
+  });
+});
 port = "80";
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
