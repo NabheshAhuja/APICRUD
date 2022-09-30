@@ -1,4 +1,4 @@
-const monmodel = require("../app");
+const StaffModel = require("../model/Employee");
 const getAllStaff = (req, callback) => {
   const data = [
     { id: "1", name: "shailesh", age: 33 },
@@ -6,9 +6,9 @@ const getAllStaff = (req, callback) => {
   ];
   callback(data);
 };
-const injson = async (req, res) => {
+const insertStaff = async (req, res) => {
   console.log("insidepostfunction");
-  const data = new monmodel({
+  const data = new StaffModel({
     id: req.body.id,
     name: req.body.name,
     designation: req.body.designation,
@@ -19,4 +19,4 @@ const injson = async (req, res) => {
   res.json(val);
 };
 // module.exports = { getAllStaff };
-module.exports = { injson };
+module.exports = { insertStaff };
