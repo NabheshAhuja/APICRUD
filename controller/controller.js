@@ -1,4 +1,4 @@
-const StaffModel = require("../model/Employee");
+const { StaffModel } = require("../model/Employee");
 const getAllStaff = (req, callback) => {
   const data = [
     { id: "1", name: "shailesh", age: 33 },
